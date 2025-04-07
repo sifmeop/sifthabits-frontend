@@ -1,8 +1,9 @@
 .loader {
+  width: var(--size);
   aspect-ratio: 1;
   --_c: no-repeat radial-gradient(farthest-side, var(--blue) 92%, #0000);
   background: var(--_c) top, var(--_c) left, var(--_c) right, var(--_c) bottom;
-  background-size: 12px 12px;
+  background-size: calc(var(--size) / 4) calc(var(--size) / 4);
   animation: l7 1s infinite;
 }
 
