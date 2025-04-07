@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import { z } from 'zod'
 import { ICreateHabitBody, IEditHabitBody, useCreateHabitMutation, useEditHabitMutation } from '~/api/habits'
 import { DAYS_OF_WEEKS } from '~/constants/habit'
@@ -37,24 +38,30 @@ export const useHabitForm = (initData?: IEditHabitBody, onClose?: () => void) =>
 
   const onSubmit = methods.handleSubmit(async (data) => {
     try {
-      const body: ICreateHabitBody | IEditHabitBody = {
-        title: data.title,
-        weekDays: data.weekDays.sort((a, b) => a - b),
-        repeats: data.repeats,
-        timeOfDay: data.timeOfDay,
-        createdAt: new Date().toISOString()
-      }
-
       if (initData) {
-        ;(body as IEditHabitBody).id = initData.id!
+        const body: IEditHabitBody = {
+          id: initData.id!,
+          title: data.title,
+          weekDays: data.weekDays.sort((a, b) => a - b),
+          repeats: data.repeats,
+          timeOfDay: data.timeOfDay
+        }
         await editMutate(body as IEditHabitBody)
       } else {
+        const body: ICreateHabitBody = {
+          title: data.title,
+          weekDays: data.weekDays.sort((a, b) => a - b),
+          repeats: data.repeats,
+          timeOfDay: data.timeOfDay,
+          createdAt: new Date().toISOString()
+        }
         await createMutate(body as ICreateHabitBody)
       }
       onClose?.()
       methods.reset()
     } catch (error) {
-      console.log('error', error)
+      console.log(initData ? 'Error updating habit' : 'Error creating habit', error)
+      toast.error(initData ? 'Error updating habit' : 'Error creating habit')
     }
   })
 

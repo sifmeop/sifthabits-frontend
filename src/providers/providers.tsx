@@ -1,6 +1,7 @@
 'use client'
 
 import { init } from '@telegram-apps/sdk-react'
+import { Toaster } from 'react-hot-toast'
 import { TanstackProvider } from './tanstack-provider'
 
 try {
@@ -10,5 +11,15 @@ try {
 }
 
 export const Providers = ({ children }: React.PropsWithChildren) => {
-  return <TanstackProvider>{children}</TanstackProvider>
+  return (
+    <TanstackProvider>
+      <Toaster
+        position='top-center'
+        toastOptions={{
+          duration: 2500
+        }}
+      />
+      {children}
+    </TanstackProvider>
+  )
 }

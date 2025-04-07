@@ -6,7 +6,7 @@ import { PopulatedUserHabit } from '~/interfaces/habits'
 import API from '~/lib/api'
 import { ICreateHabitBody } from './use-create-habit-mutation'
 
-export type IEditHabitBody = ICreateHabitBody & {
+export type IEditHabitBody = Omit<ICreateHabitBody, 'createdAt'> & {
   id: string
 }
 
