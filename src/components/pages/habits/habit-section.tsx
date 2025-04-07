@@ -16,7 +16,7 @@ export const HabitSection = ({ timeOfDay, data }: IProps) => {
     <div className='space-y-1'>
       {timeOfDay !== HabitTimeOfDay.ANYTIME && <p className='font-bold text-xs'>{timeOfDay}</p>}
       <div className='space-y-2'>
-        <AnimatePresence mode='popLayout'>
+        <AnimatePresence mode='wait'>
           {data.map((props, index) => (
             <HabitRow key={props.id} {...props} index={index} />
           ))}

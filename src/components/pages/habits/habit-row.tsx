@@ -39,11 +39,10 @@ export const HabitRow = ({ id, habit, repeats: currentRepeats, status, index }: 
     <>
       <motion.div
         key={id}
-        layout
         initial={{ opacity: 0, x: -100 - index * 100 }}
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: 100 + index * 100 }}
-        transition={{ duration: 1, type: 'spring' }}
+        transition={{ duration: 0.6, type: 'spring' }}
         className='rounded-xl border border-black/10 bg-white p-3 shadow-xl grid grid-cols-[1fr_auto] items-center gap-3'
         onClick={toggle}>
         {/* <div className='size-10 rounded-full bg-black/5 grid place-items-center'>
