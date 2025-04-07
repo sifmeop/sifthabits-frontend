@@ -1,0 +1,39 @@
+@import 'tailwindcss';
+
+:root {
+  --grey: #b1b1b1;
+  --grey-light: #eaeaea;
+  --blue: #2379ff;
+  --green: #50c878;
+  --red: #e52020;
+}
+
+@theme {
+  --font-roboto: var(--font-roboto);
+  --color-grey: var(--grey);
+  --color-grey-light: var(--grey-light);
+  --color-blue: var(--blue);
+  --color-green: var(--green);
+  --color-red: var(--red);
+}
+
+body {
+  @apply font-roboto text-sm bg-black overflow-x-hidden;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.react-toggle-thumb {
+  box-shadow: none !important;
+}
+
+input[type='time']::-webkit-calendar-picker-indicator {
+  display: none;
+}
