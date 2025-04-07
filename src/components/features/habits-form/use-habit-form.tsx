@@ -41,7 +41,8 @@ export const useHabitForm = (initData?: IEditHabitBody, onClose?: () => void) =>
         title: data.title,
         weekDays: data.weekDays.sort((a, b) => a - b),
         repeats: data.repeats,
-        timeOfDay: data.timeOfDay
+        timeOfDay: data.timeOfDay,
+        createdAt: new Date().toISOString()
       }
 
       if (initData) {

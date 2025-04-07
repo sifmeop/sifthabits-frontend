@@ -4,7 +4,7 @@ import { QUERY_KEYS } from '~/constants/query-keys'
 import { IHabit, PopulatedUserHabit } from '~/interfaces/habits'
 import API from '~/lib/api'
 
-export type ICreateHabitBody = Omit<IHabit, 'id' | 'status' | 'userId' | 'createdAt' | 'userHabits'>
+export type ICreateHabitBody = Omit<IHabit, 'id' | 'status' | 'userId' | 'userHabits'>
 
 export const useCreateHabitMutation = () => {
   const queryClient = useQueryClient()
