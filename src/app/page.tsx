@@ -1,14 +1,8 @@
 'use client'
 
-import { retrieveRawInitData } from '@telegram-apps/sdk-react'
-import { useEffect } from 'react'
-import { Spinner } from '~/ui/spinner'
+import { redirect } from 'next/navigation'
+import { ROUTER_LINKS } from '~/constants/router-links'
 
 export default function Home() {
-  useEffect(() => {
-    const initDataRaw = retrieveRawInitData()
-    console.log('initDataRaw', initDataRaw)
-  }, [])
-
-  return <Spinner absoluteCenter />
+  return redirect(ROUTER_LINKS.HABITS)
 }
