@@ -21,6 +21,7 @@ export const TitleInput = () => {
             onChange={(e) => onChange(e.target.value)}
             id={id}
             placeholder='Drink water'
+            inputMode='search'
             error={errors.title?.message}
           />
         )}

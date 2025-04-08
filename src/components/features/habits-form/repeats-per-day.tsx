@@ -36,9 +36,10 @@ export const RepeatsPerDay = () => {
             <Input
               className='w-12 h-[36px] text-center font-semibold'
               value={value}
-              onChange={(e) => onChange(e.target.value)}
+              onChange={(e) => onChange(e.target.valueAsNumber)}
               type='number'
               inputMode='numeric'
+              onBlur={(e) => onChange(e.target.valueAsNumber)}
             />
           )}
         />
