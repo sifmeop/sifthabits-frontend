@@ -31,10 +31,11 @@ export const SelectDaysOfWeeks = () => {
     <div className='flex flex-col gap-1'>
       <label className='font-semibold inline-flex'>Days of weeks</label>
       <div className='flex justify-between'>
-        {DAYS_OF_WEEKS.map((day) => (
+        {DAYS_OF_WEEKS.map((day, index) => (
           <button
-            type='button'
             key={day}
+            type='button'
+            tabIndex={index + 1}
             className={cn(
               'grid transition-colors duration-300 place-items-center size-9 rounded-full border-4 text-blue border-blue text-xs font-semibold',
               {

@@ -57,7 +57,7 @@ export const SwipeAction = ({ index, children, id, habit, repeats: currentRepeat
       return
     }
 
-    controls.start({ x: isCanUndo ? -150 : -110 })
+    controls.start({ x: isCanUndo ? -150 : -100 })
   }
 
   return (

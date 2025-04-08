@@ -6,19 +6,23 @@ import { THabitForm } from './use-habit-form'
 const options = [
   {
     label: 'Anytime',
-    value: HabitTimeOfDay.ANYTIME
+    value: HabitTimeOfDay.ANYTIME,
+    tabIndex: 8
   },
   {
     label: 'Morning',
-    value: HabitTimeOfDay.MORNING
+    value: HabitTimeOfDay.MORNING,
+    tabIndex: 9
   },
   {
     label: 'Afternoon',
-    value: HabitTimeOfDay.AFTERNOON
+    value: HabitTimeOfDay.AFTERNOON,
+    tabIndex: 10
   },
   {
     label: 'Evening',
-    value: HabitTimeOfDay.EVENING
+    value: HabitTimeOfDay.EVENING,
+    tabIndex: 11
   }
 ]
 
@@ -30,8 +34,13 @@ export const SelectTimeOfDay = () => {
   return (
     <div className='flex flex-col rounded-xl border border-grey-light p-1 gap-1'>
       <div className='grid grid-cols-4 w-full'>
-        {options.map(({ label, value }) => (
-          <button key={value} type='button' className='relative h-8' onClick={() => setValue('timeOfDay', value)}>
+        {options.map(({ label, value, tabIndex }) => (
+          <button
+            key={value}
+            tabIndex={tabIndex}
+            type='button'
+            className='relative h-8'
+            onClick={() => setValue('timeOfDay', value)}>
             {label}
             {selectedTimeOfDay === value && (
               <motion.div

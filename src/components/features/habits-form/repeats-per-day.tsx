@@ -34,6 +34,7 @@ export const RepeatsPerDay = () => {
           name='repeats'
           render={({ field: { value, onChange } }) => (
             <Input
+              tabIndex={12}
               className='w-12 h-[36px] text-center font-semibold'
               value={value}
               onChange={(e) => onChange(e.target.valueAsNumber)}
