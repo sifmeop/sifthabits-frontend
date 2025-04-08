@@ -17,6 +17,10 @@ export const TelegramProvider = ({ children }: React.PropsWithChildren) => {
           await viewport.mount()
           viewport.expand()
         }
+
+        if (disableVerticalSwipes.isAvailable()) {
+          disableVerticalSwipes()
+        }
       } catch (error) {
         console.log('Error initializing Telegram SDK from useLayoutEffect: ', error)
       }
