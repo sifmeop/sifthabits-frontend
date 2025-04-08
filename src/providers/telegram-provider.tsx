@@ -1,4 +1,4 @@
-import { disableVerticalSwipes, init, isTMA, requestFullscreen, viewport } from '@telegram-apps/sdk-react'
+import { disableVerticalSwipes, init, isTMA, viewport } from '@telegram-apps/sdk-react'
 import { useEffect } from 'react'
 
 try {
@@ -16,10 +16,6 @@ export const TelegramProvider = ({ children }: React.PropsWithChildren) => {
         if (viewport.mount.isAvailable()) {
           await viewport.mount()
           viewport.expand()
-        }
-
-        if (requestFullscreen.isAvailable()) {
-          await requestFullscreen()
         }
       } catch (error) {
         console.log('Error initializing Telegram SDK from useLayoutEffect: ', error)
