@@ -1,3 +1,4 @@
+import { retrieveRawInitData } from '@telegram-apps/sdk-react'
 import axios from 'axios'
 
 const API = axios.create({
@@ -5,7 +6,7 @@ const API = axios.create({
 })
 
 API.interceptors.request.use((config) => {
-  // config.headers['tma-init-data'] = retrieveRawInitData()
+  config.headers['tma-init-data'] = retrieveRawInitData()
   return config
 })
 
