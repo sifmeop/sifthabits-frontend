@@ -1,6 +1,6 @@
-import { useUndoHabit } from '~/features/habits-form/use-undo-habit'
 import { Button, ButtonColor } from '~/ui/button'
 import { Sheet } from '~/ui/sheet'
+import { useUndoHabit } from './use-undo-habit'
 
 interface IProps {
   id: string

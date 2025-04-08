@@ -1,7 +1,7 @@
+import { SwipeAction } from '~/features/swipe-action'
 import { HabitStatus, PopulatedUserHabit } from '~/interfaces/habits'
 import { useDoneHabit } from '~/pages/habits/use-done-habit'
 import { CircleProgressBar } from '~/ui/circle-progress-bar'
-import { SwipeAction } from '~/ui/swipe-action'
 
 type IProps = PopulatedUserHabit & {
   index: number

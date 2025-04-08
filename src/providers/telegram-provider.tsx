@@ -1,4 +1,4 @@
-import { disableVerticalSwipes, init, isTMA, viewport } from '@telegram-apps/sdk-react'
+import { disableVerticalSwipes, init, isClosingConfirmationEnabled, isTMA, viewport } from '@telegram-apps/sdk-react'
 import { useEffect } from 'react'
 
 try {
@@ -18,9 +18,8 @@ export const TelegramProvider = ({ children }: React.PropsWithChildren) => {
           viewport.expand()
         }
 
-        if (disableVerticalSwipes.isAvailable()) {
-          disableVerticalSwipes()
-        }
+        disableVerticalSwipes()
+        isClosingConfirmationEnabled()
       } catch (error) {
         console.log('Error initializing Telegram SDK from useLayoutEffect: ', error)
       }

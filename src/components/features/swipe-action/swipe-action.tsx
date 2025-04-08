@@ -5,8 +5,8 @@ import { IEditHabitBody } from '~/api/habits'
 import { HabitForm } from '~/features/habits-form'
 import { useToggle } from '~/hooks/use-toggle'
 import { PopulatedUserHabit } from '~/interfaces/habits'
-import { HabitDeleteConfirmation } from '~/pages/habits/habit-delete-confirmation'
-import { HabitUndoConfirmation } from '~/pages/habits/habit-undo-confirmation'
+import { HabitDeleteConfirmation } from './habit-delete-confirmation'
+import { HabitUndoConfirmation } from './habit-undo-confirmation'
 
 type IProps = PopulatedUserHabit & {
   index: number
@@ -57,7 +57,7 @@ export const SwipeAction = ({ index, children, id, habit, repeats: currentRepeat
       return
     }
 
-    controls.start({ x: isCanUndo ? -120 : -80 })
+    controls.start({ x: isCanUndo ? -150 : -110 })
   }
 
   return (
@@ -75,20 +75,20 @@ export const SwipeAction = ({ index, children, id, habit, repeats: currentRepeat
             {isCanUndo && (
               <button
                 type='button'
-                className='flex h-full w-[40px] items-center justify-center bg-blue text-white'
+                className='flex h-full w-[50px] items-center justify-center bg-blue text-white'
                 onClick={toggleUndo}>
                 <Undo2 size={20} />
               </button>
             )}
             <button
               type='button'
-              className='flex h-full w-[40px] items-center justify-center bg-yellow-500 text-white'
+              className='flex h-full w-[50px] items-center justify-center bg-yellow-500 text-white'
               onClick={toggleEdit}>
               <Edit2 size={20} />
             </button>
             <button
               type='button'
-              className='flex h-full w-[40px] items-center justify-center bg-red text-white'
+              className='flex h-full w-[50px] items-center justify-center bg-red text-white'
               onClick={toggleDelete}>
               <Trash2 size={20} />
             </button>
@@ -96,7 +96,7 @@ export const SwipeAction = ({ index, children, id, habit, repeats: currentRepeat
         </div>
         <motion.div
           drag='x'
-          dragConstraints={{ left: -120, right: 0 }}
+          dragConstraints={{ left: -150, right: 0 }}
           dragElastic={0.1}
           dragMomentum={false}
           onDragEnd={handleDragEnd}
