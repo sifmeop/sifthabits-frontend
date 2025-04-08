@@ -82,7 +82,7 @@ export const Sheet = ({ isOpen, onClose, title, size = 'lg', children, isLoading
               ref={sheetRef}
               style={{ height }}
               className='fixed shadow-2xl flex flex-col rounded-t-lg bottom-0 left-0 w-full bg-white'>
-              <div className='relative p-3'>
+              <div className='relative p-3 pb-4'>
                 <Spinner boxCenter isLoading={isLoading} wrapperClassName='rounded-t-lg rounded-b-none' />
                 <div className='flex items-center mb-2'>
                   {title && <p className='text-xl font-bold'>{title}</p>}
