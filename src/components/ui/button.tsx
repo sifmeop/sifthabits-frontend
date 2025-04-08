@@ -22,16 +22,12 @@ export const Button = ({ className, isLoading, children, color = ButtonColor.PRI
         {
           'bg-blue': color === ButtonColor.PRIMARY,
           'bg-red': color === ButtonColor.SECONDARY,
-          'bg-grey-light': color === ButtonColor.TERTIARY,
+          'bg-grey-light text-black': color === ButtonColor.TERTIARY,
           'pointer-events-none': isLoading
         }
       )}
       {...props}>
-      {isLoading && (
-        <div className='absolute inset-0 grid place-items-center bg-white/60'>
-          <Spinner size={24} />
-        </div>
-      )}
+      <Spinner boxCenter size={24} isLoading={isLoading} />
       {children}
     </button>
   )

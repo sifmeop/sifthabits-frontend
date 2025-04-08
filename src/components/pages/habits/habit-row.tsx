@@ -1,27 +1,18 @@
-import { motion } from 'motion/react'
-import { IEditHabitBody } from '~/api/habits'
-import { HabitForm } from '~/features/habits-form'
-import { useToggle } from '~/hooks/use-toggle'
 import { HabitStatus, PopulatedUserHabit } from '~/interfaces/habits'
 import { useDoneHabit } from '~/pages/habits/use-done-habit'
 import { CircleProgressBar } from '~/ui/circle-progress-bar'
+import { SwipeAction } from '~/ui/swipe-action'
 
 type IProps = PopulatedUserHabit & {
   index: number
 }
 
-export const HabitRow = ({ id, habit, repeats: currentRepeats, status, index }: IProps) => {
-  const { title, timeOfDay, weekDays, repeats } = habit
+export const HabitRow = (props: IProps) => {
+  const { id, habit, repeats: currentRepeats, status } = props
+  const { title, repeats } = habit
 
-  const [isOpen, toggle] = useToggle()
   const isDone = status === HabitStatus.DONE
-  const initData: IEditHabitBody = {
-    id,
-    title,
-    repeats,
-    timeOfDay,
-    weekDays
-  }
+  const isMissed = status === HabitStatus.MISSED
 
   const { handleDoneHabit } = useDoneHabit()
 
@@ -36,23 +27,14 @@ export const HabitRow = ({ id, habit, repeats: currentRepeats, status, index }: 
   }
 
   return (
-    <>
-      <motion.div
-        key={id}
-        initial={{ opacity: 0, x: -100 - index * 100 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: 100 + index * 100 }}
-        transition={{ duration: 0.6, type: 'spring' }}
-        className='rounded-xl border border-black/10 bg-white p-3 shadow-xl grid grid-cols-[1fr_auto] items-center gap-3'
-        onClick={toggle}>
-        {/* <div className='size-10 rounded-full bg-black/5 grid place-items-center'>
-          <LayoutDashboard />
-        </div> */}
+    <SwipeAction {...props}>
+      <div className='bg-white p-3 grid grid-cols-[1fr_auto] items-center gap-3'>
         <div>
           <p className='font-bold'>{title}</p>
           <span>{repeats === 1 ? 'Once a day' : `Goal: ${repeats}`}</span>
         </div>
         <CircleProgressBar
+          isMissed={isMissed}
           onlyProgressBar={false}
           showCompletionAnimation
           currentValue={currentRepeats}
@@ -64,8 +46,7 @@ export const HabitRow = ({ id, habit, repeats: currentRepeats, status, index }: 
           textClassName='font-bold'
           onClick={onDone}
         />
-      </motion.div>
-      <HabitForm isOpen={isOpen} onClose={toggle} initData={initData} />
-    </>
+      </div>
+    </SwipeAction>
   )
 }

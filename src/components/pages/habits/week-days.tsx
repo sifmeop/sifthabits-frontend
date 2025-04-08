@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import { motion } from 'motion/react'
 import { useGetHabitsQuery } from '~/api/habits'
 import { CURRENT_DATE, WEEK_DATES } from '~/constants/habit'
 import { CircleProgressBar } from '~/ui/circle-progress-bar'
@@ -26,7 +27,7 @@ export const WeekDays = () => {
           <button
             key={date.toISOString()}
             className={cn(
-              'font-semibold flex flex-col items-center py-1 gap-0.5 transition-colors duration-300 text-grey',
+              'font-semibold relative flex flex-col items-center py-1 gap-0.5 transition-colors duration-300 text-grey',
               {
                 'text-black': dayjs(selectedDate).isSame(date, 'day'),
                 'text-green': dayjs(new Date()).isSame(date, 'day')
@@ -43,6 +44,14 @@ export const WeekDays = () => {
               height={20}
               strokeWidth={4}
             />
+            {dayjs(selectedDate).isSame(date, 'day') && (
+              <motion.div
+                layoutId='dot'
+                className='absolute -top-1 size-1 bg-blue rounded-full'
+                initial={false}
+                transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+              />
+            )}
           </button>
         )
       })}

@@ -6,7 +6,11 @@ import { cn } from '~/utils/cn'
 import { THabitForm } from './use-habit-form'
 
 export const SelectDaysOfWeeks = () => {
-  const { setValue, watch } = useFormContext<THabitForm>()
+  const {
+    setValue,
+    watch,
+    formState: { errors }
+  } = useFormContext<THabitForm>()
 
   const weekDays = watch('weekDays')
 
@@ -24,8 +28,8 @@ export const SelectDaysOfWeeks = () => {
   }
 
   return (
-    <div>
-      <label className='font-semibold inline-flex mb-1'>Days of weeks</label>
+    <div className='flex flex-col gap-1'>
+      <label className='font-semibold inline-flex'>Days of weeks</label>
       <div className='flex justify-between'>
         {DAYS_OF_WEEKS.map((day) => (
           <button
@@ -42,6 +46,7 @@ export const SelectDaysOfWeeks = () => {
           </button>
         ))}
       </div>
+      <span className='text-red text-sm'>{errors.weekDays?.message}</span>
     </div>
   )
 }

@@ -3,18 +3,18 @@
 :root {
   --grey: #b1b1b1;
   --grey-light: #eaeaea;
-  --blue: #2379ff;
-  --green: #50c878;
-  --red: #e52020;
+  --blue: #0d92f4;
+  --green: #6bcb77;
+  --red: #f95454;
 }
 
 @theme {
   --font-roboto: var(--font-roboto);
   --color-grey: var(--grey);
   --color-grey-light: var(--grey-light);
-  --color-blue: var(--blue);
-  --color-green: var(--green);
-  --color-red: var(--red);
+  --color-green: var(--color-green-500);
+  --color-blue: var(--color-blue-500);
+  --color-red: var(--color-red-500);
 }
 
 body {

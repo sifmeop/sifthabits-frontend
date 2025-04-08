@@ -15,8 +15,14 @@ export const TitleInput = () => {
       <Controller
         control={control}
         name='title'
-        render={({ field: { value, onChange } }) => (
-          <Input value={value} onChange={(e) => onChange(e.target.value)} id={id} placeholder='Drink water' />
+        render={({ field: { value, onChange }, formState: { errors } }) => (
+          <Input
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            id={id}
+            placeholder='Drink water'
+            error={errors.title?.message}
+          />
         )}
       />
     </div>

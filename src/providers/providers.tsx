@@ -1,17 +1,17 @@
 'use client'
 
-import { init } from '@telegram-apps/sdk-react'
+import dayjs from 'dayjs'
+import isoWeek from 'dayjs/plugin/isoWeek'
+import utc from 'dayjs/plugin/utc'
 import { Toaster } from 'react-hot-toast'
 import { TanstackProvider } from './tanstack-provider'
 
-try {
-  init()
-} catch (error) {
-  console.log(`Error initializing Telegram SDK: ${error}`)
-}
+dayjs.extend(isoWeek)
+dayjs.extend(utc)
 
 export const Providers = ({ children }: React.PropsWithChildren) => {
   return (
+    // <TelegramProvider>
     <TanstackProvider>
       <Toaster
         position='top-center'
@@ -21,5 +21,6 @@ export const Providers = ({ children }: React.PropsWithChildren) => {
       />
       {children}
     </TanstackProvider>
+    // </TelegramProvider>
   )
 }

@@ -1,10 +1,3 @@
-'use client'
-
-import dayjs from 'dayjs'
-import isoWeek from 'dayjs/plugin/isoWeek'
-
-dayjs.extend(isoWeek)
-
 import { Navigation } from './navigation'
 
 export const Layout = ({ children }: React.PropsWithChildren) => {

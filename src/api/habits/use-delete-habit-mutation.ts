@@ -4,21 +4,30 @@ import { QUERY_KEYS } from '~/constants/query-keys'
 import { PopulatedUserHabit } from '~/interfaces/habits'
 import API from '~/lib/api'
 
-export interface IDeleteHabitBody {
-  id: string
-}
-
 export const useDeleteHabitMutation = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
     mutationKey: MUTATION_KEYS.DELETE_HABIT,
-    mutationFn: async (data: IDeleteHabitBody) => {
-      const response = await API.delete<PopulatedUserHabit>(`/habits/${data.id}/delete`)
+    mutationFn: async (id: string) => {
+      const response = await API.delete<PopulatedUserHabit>(`/habits/${id}/delete`)
       return response.data
     },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.HABITS })
+    onMutate: (id) => {
+      const previousHabits = queryClient.getQueryData(QUERY_KEYS.HABITS) as Record<number, PopulatedUserHabit[]>
+      const upHabits = Object.fromEntries(
+        Object.entries(previousHabits).map(([key, value]) => [
+          Number(key),
+          value.filter(({ habit }) => habit.id !== id)
+        ])
+      )
+
+      queryClient.setQueryData(QUERY_KEYS.HABITS, upHabits)
+
+      return { previousHabits }
+    },
+    onError: (_, __, context) => {
+      queryClient.setQueryData(QUERY_KEYS.HABITS, context?.previousHabits)
     }
   })
 }

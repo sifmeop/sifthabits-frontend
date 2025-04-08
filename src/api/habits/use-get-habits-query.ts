@@ -9,8 +9,8 @@ interface IGetHabitsResponse {
 }
 
 export const useGetHabitsQuery = () => {
-  const from = dayjs().startOf('isoWeek').toDate().toISOString()
-  const to = dayjs().endOf('isoWeek').toDate().toISOString()
+  const from = dayjs().startOf('isoWeek').toDate().toUTCString()
+  const to = dayjs().endOf('isoWeek').toDate().toUTCString()
 
   return useQuery({
     queryKey: QUERY_KEYS.HABITS,

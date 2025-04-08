@@ -1,22 +1,42 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { motion } from 'motion/react'
 import { cn } from '~/utils/cn'
 import styles from './styles.module.css'
 
 interface IProps {
+  isLoading?: boolean
+  wrapperClassName?: string
   className?: string
-  center?: boolean
-  absoluteCenter?: boolean
+  centerX?: boolean
+  screenCenter?: boolean
+  boxCenter?: boolean
   size?: number
 }
 
-export const Spinner = ({ className, absoluteCenter, center, size = 40 }: IProps) => {
+export const Spinner = ({
+  isLoading,
+  className,
+  wrapperClassName,
+  screenCenter,
+  boxCenter,
+  centerX,
+  size = 40
+}: IProps) => {
   return (
-    <div
-      className={cn('relative', {
-        'fixed inset-0 grid place-items-center': absoluteCenter,
-        'flex justify-center': center
-      })}>
-      <div style={{ '--size': `${size}px` } as any} className={cn(styles.loader, className)} />
-    </div>
+    <>
+      {isLoading && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className={cn('relative rounded-xl', wrapperClassName, {
+            'absolute inset-0 grid place-items-center bg-black/60 z-[1]': boxCenter,
+            'fixed inset-0 grid place-items-center': screenCenter,
+            'flex justify-center': centerX
+          })}>
+          <div style={{ '--size': `${size}px` } as any} className={cn(styles.loader, className)} />
+        </motion.div>
+      )}
+    </>
   )
 }

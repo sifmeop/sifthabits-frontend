@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
@@ -8,11 +9,10 @@ import { HabitTimeOfDay } from '~/interfaces/habits'
 
 const schema = z.object({
   id: z.string().optional(),
-  title: z.string(),
-  weekDays: z.array(z.number()),
+  title: z.string().min(1),
+  weekDays: z.array(z.number()).min(1, 'Please select at least one day'),
   repeats: z.number(),
   timeOfDay: z.nativeEnum(HabitTimeOfDay)
-  // color: z.string()
 })
 
 export type THabitForm = z.infer<typeof schema>
@@ -28,13 +28,18 @@ export const useHabitForm = (initData?: IEditHabitBody, onClose?: () => void) =>
     weekDays: initData?.weekDays ?? DAYS_OF_WEEKS.map((day) => DAYS_OF_WEEKS.indexOf(day) + 1),
     repeats: initData?.repeats ?? 1,
     timeOfDay: initData?.timeOfDay ?? HabitTimeOfDay.ANYTIME
-    // color: ''
   }
 
   const methods = useForm<THabitForm>({
     defaultValues,
     resolver: zodResolver(schema)
   })
+
+  useEffect(() => {
+    if (initData) {
+      methods.reset(defaultValues)
+    }
+  }, [initData])
 
   const onSubmit = methods.handleSubmit(async (data) => {
     try {
@@ -52,8 +57,7 @@ export const useHabitForm = (initData?: IEditHabitBody, onClose?: () => void) =>
           title: data.title,
           weekDays: data.weekDays.sort((a, b) => a - b),
           repeats: data.repeats,
-          timeOfDay: data.timeOfDay,
-          createdAt: new Date().toISOString()
+          timeOfDay: data.timeOfDay
         }
         await createMutate(body as ICreateHabitBody)
       }

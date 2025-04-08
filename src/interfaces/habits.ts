@@ -22,13 +22,12 @@ export type PopulatedUserHabit = IUserHabit & { habit: IHabit }
 export enum HabitStatus {
   IN_PROGRESS = 'IN_PROGRESS',
   DONE = 'DONE',
-  MISSED = 'MISSED',
-  ARCHIVED = 'ARCHIVED'
+  MISSED = 'MISSED'
 }
 
 export enum HabitTimeOfDay {
+  ANYTIME = 'ANYTIME',
   MORNING = 'MORNING',
   AFTERNOON = 'AFTERNOON',
-  EVENING = 'EVENING',
-  ANYTIME = 'ANYTIME'
+  EVENING = 'EVENING'
 }
