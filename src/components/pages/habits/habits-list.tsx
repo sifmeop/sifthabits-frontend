@@ -25,7 +25,7 @@ export const HabitsList = () => {
 
   return (
     <AnimatePresence mode='wait'>
-      <div className='p-3 space-y-3 h-full border-t border-t-grey-light'>
+      <div id='habits-list' className='p-3 space-y-3 h-full border-t border-t-grey-light overflow-y-auto'>
         <Spinner centerX isLoading={isLoading} />
         {isError && (
           <motion.p

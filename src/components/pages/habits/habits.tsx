@@ -8,7 +8,7 @@ import { WeekDays } from './week-days'
 export const Habits = () => {
   return (
     <HabitsProvider>
-      <div className='grid grid-rows-[auto_auto_1fr]'>
+      <div className='grid grid-rows-[auto_auto_1fr] overflow-y-auto'>
         <HabitsHeader />
         <WeekDays />
         {/* <WeekCarousel> */}

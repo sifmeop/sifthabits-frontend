@@ -10,6 +10,11 @@ export const WeekDays = () => {
   const { data } = useGetHabitsQuery()
   const { selectedDate, setSelectedDate } = useSelectedDate()
 
+  const onSelectedDate = (date: Date) => {
+    document.getElementById('habits-list')?.scrollTo(0, 0)
+    setSelectedDate(date)
+  }
+
   return (
     <div className='grid grid-cols-7 gap-2 p-2'>
       {WEEK_DATES.map((date, index) => {
@@ -33,7 +38,7 @@ export const WeekDays = () => {
                 'text-green': dayjs(new Date()).isSame(date, 'day')
               }
             )}
-            onClick={() => setSelectedDate(date)}
+            onClick={() => onSelectedDate(date)}
             disabled={CURRENT_DATE.getTime() < date.getTime()}>
             <span>{dayjs(date).format('ddd')}</span>
             <CircleProgressBar
