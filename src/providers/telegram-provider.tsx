@@ -1,36 +1,17 @@
-import { disableVerticalSwipes, init, isClosingConfirmationEnabled, isTMA, viewport } from '@telegram-apps/sdk-react'
-import { useEffect } from 'react'
+import { disableVerticalSwipes, expandViewport, init, isTMA, mountSwipeBehavior } from '@telegram-apps/sdk-react'
+import { NODE_ENV } from '~/constants/common'
 
 try {
   init()
+  mountSwipeBehavior()
+  expandViewport()
   disableVerticalSwipes()
-  viewport.expand()
 } catch (error) {
   console.log(`Error initializing Telegram SDK: ${error}`)
 }
 
 export const TelegramProvider = ({ children }: React.PropsWithChildren) => {
-  useEffect(() => {
-    const handleInit = async () => {
-      try {
-        if (viewport.mount.isAvailable()) {
-          await viewport.mount()
-          viewport.expand()
-        }
-
-        disableVerticalSwipes()
-        isClosingConfirmationEnabled()
-      } catch (error) {
-        console.log('Error initializing Telegram SDK from useLayoutEffect: ', error)
-      }
-    }
-
-    if (isTMA()) {
-      handleInit()
-    }
-  }, [])
-
-  if (!isTMA()) {
+  if (NODE_ENV === 'production' && !isTMA()) {
     return (
       <div className='grid place-items-center h-dvh bg-white'>
         <div className='flex flex-col items-center gap-1'>

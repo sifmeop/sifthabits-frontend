@@ -37,7 +37,7 @@ export const Navigation = () => {
   }
 
   return (
-    <nav className='p-2 border-t border-t-grey bg-white'>
+    <nav className='p-2 pb-5 border-t border-t-grey bg-white'>
       <ul className='flex justify-evenly gap-2'>
         {LINKS.map(({ label, href, Icon }) => (
           <li
