@@ -81,7 +81,7 @@ export const CircleProgressBar = ({
       completionControls.start({
         scale: [1, 1.2, 1],
         opacity: [0, 1, 1],
-        transition: { duration: 0.5, delay: 0.3 }
+        transition: { duration: 0.5, delay: isMissed ? 1 : 0.3 }
       })
     } else {
       backgroundControls.start({
@@ -94,10 +94,7 @@ export const CircleProgressBar = ({
   const displayText = typeof text === 'function' ? text(percentage) : text
 
   return (
-    <div
-      style={{ width, height }}
-      className='relative inline-flex items-center justify-center'
-      onClick={isMissed ? undefined : onClick}>
+    <div style={{ width, height }} className='relative inline-flex items-center justify-center' onClick={onClick}>
       <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
         <defs>
           <linearGradient id={gradientId} x1='0%' y1='0%' x2='100%' y2='0%'>
@@ -181,30 +178,34 @@ export const CircleProgressBar = ({
           </motion.svg>
         </motion.div>
       </AnimatePresence>
-      {isMissed && (
-        <div className='absolute inset-0 grid place-items-center'>
-          <motion.svg
-            width={width * 0.6}
-            height={height * 0.6}
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='var(--red)'
-            strokeWidth='4'>
-            <motion.path
-              d='M18 6 6 18'
-              initial={{ pathLength: 0, rotate: 180, transformOrigin: 'center' }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            />
-            <motion.path
-              d='m6 6 12 12'
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            />
-          </motion.svg>
-        </div>
-      )}
+      <AnimatePresence>
+        {isMissed && (
+          <div className='absolute inset-0 grid place-items-center'>
+            <motion.svg
+              width={width * 0.6}
+              height={height * 0.6}
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='var(--red)'
+              strokeWidth='4'>
+              <motion.path
+                d='M18 6 6 18'
+                initial={{ pathLength: 0, rotate: 180, transformOrigin: 'center' }}
+                animate={{ pathLength: 1 }}
+                exit={{ pathLength: 0, transition: { duration: 0.1, delay: 0 } }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              />
+              <motion.path
+                d='m6 6 12 12'
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                exit={{ pathLength: 0, transition: { duration: 0.1, delay: 0 } }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              />
+            </motion.svg>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

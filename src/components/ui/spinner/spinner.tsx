@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { motion } from 'motion/react'
+import { AnimatePresence, motion } from 'motion/react'
 import { cn } from '~/utils/cn'
 import styles from './styles.module.css'
 
@@ -23,7 +23,7 @@ export const Spinner = ({
   size = 40
 }: IProps) => {
   return (
-    <>
+    <AnimatePresence>
       {isLoading && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -31,12 +31,12 @@ export const Spinner = ({
           exit={{ opacity: 0 }}
           className={cn('relative rounded-xl', wrapperClassName, {
             'absolute inset-0 grid place-items-center bg-black/60 z-[1]': boxCenter,
-            'fixed inset-0 grid place-items-center': screenCenter,
+            'fixed inset-0 grid h-dvh rounded-none place-items-center z-10 bg-black/30': screenCenter,
             'flex justify-center': centerX
           })}>
           <div style={{ '--size': `${size}px` } as any} className={cn(styles.loader, className)} />
         </motion.div>
       )}
-    </>
+    </AnimatePresence>
   )
 }

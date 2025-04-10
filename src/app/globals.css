@@ -2,7 +2,7 @@
 
 :root {
   --grey: #b1b1b1;
-  --grey-light: #eaeaea;
+  --gray-light: #eaeaea;
   --blue: #0d92f4;
   --green: #6bcb77;
   --red: #f95454;
@@ -11,14 +11,14 @@
 @theme {
   --font-roboto: var(--font-roboto);
   --color-grey: var(--grey);
-  --color-grey-light: var(--grey-light);
+  --color-gray-light: var(--gray-light);
   --color-green: var(--color-green-500);
   --color-blue: var(--color-blue-500);
   --color-red: var(--color-red-500);
 }
 
 body {
-  @apply font-roboto text-sm bg-black overflow-x-hidden;
+  @apply font-roboto text-sm bg-black overflow-hidden;
 }
 
 .hide-scrollbar {

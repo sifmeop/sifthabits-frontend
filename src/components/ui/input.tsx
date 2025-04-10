@@ -12,7 +12,7 @@ export const Input = ({ className, register, error, ...props }: IProps) => {
       <input
         {...register}
         className={cn(
-          'transition-all focus:outline-none bg-grey-light duration-300 flex p-3 rounded-xl border-transparent w-full',
+          'transition-all focus:outline-none bg-gray-light duration-300 flex p-3 rounded-xl border-transparent w-full',
           className
         )}
         {...props}

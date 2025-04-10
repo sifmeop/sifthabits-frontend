@@ -21,7 +21,9 @@ export const HabitDeleteConfirmation = ({ id, isOpen, onClose }: IProps) => {
   return (
     <Sheet size='content' title='Delete' isOpen={isOpen} onClose={onClose} isLoading={isLoading}>
       <div className='flex flex-col gap-2 justify-center h-full'>
-        <p className='text-base font-semibold text-center'>Are you sure you want to delete this habit?</p>
+        <p className='text-base font-semibold text-center'>
+          Are you sure you want to delete this habit and clear its history?
+        </p>
         <Button color={ButtonColor.SECONDARY} onClick={onDelete}>
           Delete
         </Button>

@@ -25,8 +25,10 @@ export const HabitsList = () => {
 
   return (
     <AnimatePresence mode='wait'>
-      <div id='habits-list' className='p-3 space-y-3 h-full border-t border-t-grey-light overflow-y-auto'>
-        <Spinner centerX isLoading={isLoading} />
+      <div
+        id='habits-list'
+        className='p-3 space-y-3 overflow-x-hidden h-full border-t border-t-gray-light overflow-y-auto'>
+        <Spinner screenCenter isLoading={isLoading} />
         {isError && (
           <motion.p
             key='error'
@@ -47,7 +49,6 @@ export const HabitsList = () => {
             No habits
           </motion.p>
         )}
-
         <HabitSection showTitle={showAnytimeTitle} timeOfDay={HabitTimeOfDay.ANYTIME} data={anytimeHabits} />
         <HabitSection timeOfDay={HabitTimeOfDay.MORNING} data={morningsHabits} />
         <HabitSection timeOfDay={HabitTimeOfDay.AFTERNOON} data={afternoonsHabits} />

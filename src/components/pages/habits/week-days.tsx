@@ -7,7 +7,7 @@ import { cn } from '~/utils/cn'
 import { useSelectedDate } from './habits-provider'
 
 export const WeekDays = () => {
-  const { data } = useGetHabitsQuery()
+  const { data } = useGetHabitsQuery('week')
   const { selectedDate, setSelectedDate } = useSelectedDate()
 
   const onSelectedDate = (date: Date) => {

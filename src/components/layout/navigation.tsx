@@ -1,6 +1,6 @@
 'use client'
 
-import { List } from 'lucide-react'
+import { ChartArea, List } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ROUTER_LINKS } from '~/constants/router-links'
@@ -16,17 +16,17 @@ const LINKS = [
     href: ROUTER_LINKS.HABITS,
     Icon: List,
     label: 'Habits'
-  }
+  },
   // {
   //   href: ROUTER_LINKS.PROGRESS,
   //   Icon: ChartPie,
   //   label: 'Progress'
   // }
-  // {
-  //   href: ROUTER_LINKS.STATISTICS,
-  //   Icon: ChartArea,
-  //   label: 'Statistics'
-  // }
+  {
+    href: ROUTER_LINKS.STATISTICS,
+    Icon: ChartArea,
+    label: 'Statistics'
+  }
 ]
 
 export const Navigation = () => {
@@ -37,7 +37,7 @@ export const Navigation = () => {
   }
 
   return (
-    <nav className='p-2 pb-5 border-t border-t-grey bg-white'>
+    <nav className='p-2 pb-5 border-t border-t-black/10 bg-white'>
       <ul className='flex justify-evenly gap-2'>
         {LINKS.map(({ label, href, Icon }) => (
           <li

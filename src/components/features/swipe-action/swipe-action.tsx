@@ -69,7 +69,7 @@ export const SwipeAction = ({ index, children, id, habit, repeats: currentRepeat
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: 100 + index * 100 }}
         transition={{ duration: 0.6, type: 'spring' }}
-        className='relative w-full overflow-hidden bg-grey-light rounded-xl shadow-xl border border-black/10'>
+        className='relative w-full overflow-hidden bg-gray-light rounded-xl shadow-xl border border-black/10'>
         <div className='absolute right-0 top-0 flex h-full shadow-xl z-[0]'>
           <div className='flex'>
             {isCanUndo && (

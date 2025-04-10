@@ -12,11 +12,15 @@ export const useGetHabitsQuery = () => {
   const from = dayjs().startOf('isoWeek').format('YYYY-MM-DD')
   const to = dayjs().endOf('isoWeek').format('YYYY-MM-DD')
 
-  return useQuery({
+  const searchParams = new URLSearchParams({ from, to })
+
+  const methods = useQuery({
     queryKey: QUERY_KEYS.HABITS,
     queryFn: async () => {
-      const response = await API.get<IGetHabitsResponse>(`/habits?${new URLSearchParams({ from, to })}`)
+      const response = await API.get<IGetHabitsResponse>(`/habits?${searchParams}`)
       return response.data
     }
   })
+
+  return methods
 }

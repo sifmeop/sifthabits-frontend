@@ -15,6 +15,7 @@ export interface IUserHabit {
   repeats: number
   habitId: string
   createdAt: string
+  streak?: number
 }
 
 export type PopulatedUserHabit = IUserHabit & { habit: IHabit }

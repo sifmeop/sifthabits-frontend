@@ -22,7 +22,7 @@ export const Button = ({ className, isLoading, children, color = ButtonColor.PRI
         {
           'bg-blue': color === ButtonColor.PRIMARY,
           'bg-red': color === ButtonColor.SECONDARY,
-          'bg-grey-light text-black': color === ButtonColor.TERTIARY,
+          'bg-gray-light text-black': color === ButtonColor.TERTIARY,
           'pointer-events-none': isLoading
         }
       )}
