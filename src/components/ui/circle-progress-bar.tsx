@@ -8,8 +8,7 @@ import { cn } from '~/utils/cn'
 interface IProps {
   currentValue: number
   maxValue: number
-  width?: number
-  height?: number
+  size?: number
   strokeWidth?: number
   gradientStart?: string
   gradientEnd?: string
@@ -26,8 +25,7 @@ interface IProps {
 export const CircleProgressBar = ({
   currentValue,
   maxValue,
-  width = 35,
-  height = 35,
+  size = 35,
   strokeWidth = 6,
   gradientStart = '#6366F1',
   gradientEnd = '#8B5CF6',
@@ -47,13 +45,13 @@ export const CircleProgressBar = ({
   const completionControls = useAnimation()
   const backgroundControls = useAnimation()
 
-  const radius = (Math.min(width, height) - strokeWidth) / 2
+  const radius = (Math.min(size, size) - strokeWidth) / 2
   const circumference = radius * 2 * Math.PI
   const strokeDashoffset = circumference - (percentage / 100) * circumference
 
   const center = {
-    x: width / 2,
-    y: height / 2
+    x: size / 2,
+    y: size / 2
   }
 
   useEffect(() => {
@@ -94,8 +92,11 @@ export const CircleProgressBar = ({
   const displayText = typeof text === 'function' ? text(percentage) : text
 
   return (
-    <div style={{ width, height }} className='relative inline-flex items-center justify-center' onClick={onClick}>
-      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+    <div
+      style={{ width: size, height: size }}
+      className='relative inline-flex items-center justify-center'
+      onClick={onClick}>
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
         <defs>
           <linearGradient id={gradientId} x1='0%' y1='0%' x2='100%' y2='0%'>
             <stop offset='0%' stopColor={gradientStart} />
@@ -162,8 +163,8 @@ export const CircleProgressBar = ({
             transition={{ duration: 1, ease: 'easeOut' }}
           />
           <motion.svg
-            width={width * 0.6}
-            height={height * 0.6}
+            width={size * 0.6}
+            height={size * 0.6}
             viewBox='0 0 24 24'
             fill='none'
             stroke='white'
@@ -182,8 +183,8 @@ export const CircleProgressBar = ({
         {isMissed && (
           <div className='absolute inset-0 grid place-items-center'>
             <motion.svg
-              width={width * 0.6}
-              height={height * 0.6}
+              width={size * 0.6}
+              height={size * 0.6}
               viewBox='0 0 24 24'
               fill='none'
               stroke='var(--red)'

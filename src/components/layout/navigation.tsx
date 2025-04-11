@@ -17,16 +17,16 @@ const LINKS = [
     Icon: List,
     label: 'Habits'
   },
-  // {
-  //   href: ROUTER_LINKS.PROGRESS,
-  //   Icon: ChartPie,
-  //   label: 'Progress'
-  // }
   {
     href: ROUTER_LINKS.STATISTICS,
     Icon: ChartArea,
     label: 'Statistics'
   }
+  // {
+  //   href: ROUTER_LINKS.LEADERBOARD,
+  //   Icon: ChartArea,
+  //   label: 'Leaderboard'
+  // }
 ]
 
 export const Navigation = () => {
@@ -37,8 +37,8 @@ export const Navigation = () => {
   }
 
   return (
-    <nav className='p-2 pb-5 border-t border-t-black/10 bg-white'>
-      <ul className='flex justify-evenly gap-2'>
+    <nav className='px-2 py-3 pb-5 border-t border-t-black/10 bg-white'>
+      <ul style={{ gridTemplateColumns: `repeat(${LINKS.length}, 1fr)` }} className='grid gap-2'>
         {LINKS.map(({ label, href, Icon }) => (
           <li
             key={href}

@@ -1,14 +1,16 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import dayjs from 'dayjs'
 import { MUTATION_KEYS } from '~/constants/mutation-keys'
 import { QUERY_KEYS } from '~/constants/query-keys'
 import { IHabit, PopulatedUserHabit } from '~/interfaces/habits'
 import API from '~/lib/api'
+import { useSelectedDate } from '~/pages/habits/habits-provider'
 
 export type ICreateHabitBody = Omit<IHabit, 'id' | 'status' | 'userId' | 'createdAt' | 'userHabits'>
 
 export const useCreateHabitMutation = () => {
   const queryClient = useQueryClient()
-  // const { setSelectedDate } = useSelectedDate()
+  const { setSelectedDate } = useSelectedDate()
 
   return useMutation({
     mutationKey: MUTATION_KEYS.CREATE_HABIT,
@@ -16,20 +18,21 @@ export const useCreateHabitMutation = () => {
       const response = await API.post<PopulatedUserHabit>('/habits', data)
       return response.data
     },
-    // onSuccess: (data) => {
-    //   const date = new Date()
-    //   const day = dayjs(date).isoWeekday()
+    onSuccess: (data) => {
+      const date = new Date()
+      const day = dayjs(date).isoWeekday()
 
-    //   const habits = queryClient.getQueryData(QUERY_KEYS.HABITS) as Record<number, PopulatedUserHabit[]>
-    //   const upHabits = structuredClone(habits)
-    //   upHabits[day] = [data, ...upHabits[day]]
+      const habits = queryClient.getQueryData(QUERY_KEYS.HABITS) as Record<number, PopulatedUserHabit[]>
+      const upHabits = structuredClone(habits)
+      upHabits[day] = [data, ...upHabits[day]]
 
-    //   queryClient.setQueryData(QUERY_KEYS.HABITS, upHabits)
+      queryClient.setQueryData(QUERY_KEYS.HABITS, upHabits)
 
-    //   setSelectedDate(date)
-    // }
+      setSelectedDate(date)
+    },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.HABITS })
+      queryClient.refetchQueries({ queryKey: QUERY_KEYS.STATISTICS('week') })
+      queryClient.refetchQueries({ queryKey: QUERY_KEYS.STATISTICS('month') })
     }
   })
 }

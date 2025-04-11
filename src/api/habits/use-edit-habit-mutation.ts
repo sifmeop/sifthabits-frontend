@@ -27,9 +27,13 @@ export const useEditHabitMutation = () => {
       upHabits[day][habitIndex] = data
 
       queryClient.setQueryData(QUERY_KEYS.HABITS, upHabits)
+      queryClient.refetchQueries({ queryKey: QUERY_KEYS.STATISTICS('week') })
+      queryClient.refetchQueries({ queryKey: QUERY_KEYS.STATISTICS('month') })
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.HABITS })
+      // queryClient.invalidateQueries({ queryKey: QUERY_KEYS.HABITS })
+      // queryClient.refetchQueries({ queryKey: QUERY_KEYS.STATISTICS('week') })
+      // queryClient.refetchQueries({ queryKey: QUERY_KEYS.STATISTICS('month') })
     }
   })
 }

@@ -45,8 +45,7 @@ export const WeekDays = () => {
               onlyProgressBar
               maxValue={totalHabits || 1}
               currentValue={totalCompleted}
-              width={20}
-              height={20}
+              size={20}
               strokeWidth={4}
             />
             {dayjs(selectedDate).isSame(date, 'day') && (

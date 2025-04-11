@@ -36,6 +36,8 @@ export const useDoneHabitMutation = () => {
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.HABITS })
+      queryClient.refetchQueries({ queryKey: QUERY_KEYS.STATISTICS('week') })
+      queryClient.refetchQueries({ queryKey: QUERY_KEYS.STATISTICS('month') })
     }
   })
 }

@@ -28,6 +28,10 @@ export const useDeleteHabitMutation = () => {
     },
     onError: (_, __, context) => {
       queryClient.setQueryData(QUERY_KEYS.HABITS, context?.previousHabits)
+    },
+    onSuccess: () => {
+      queryClient.refetchQueries({ queryKey: QUERY_KEYS.STATISTICS('week') })
+      queryClient.refetchQueries({ queryKey: QUERY_KEYS.STATISTICS('month') })
     }
   })
 }

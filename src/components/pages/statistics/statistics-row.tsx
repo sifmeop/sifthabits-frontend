@@ -4,15 +4,30 @@ import dayjs from 'dayjs'
 import { motion } from 'motion/react'
 import { IStatistic, ITimeRange } from '~/api/habits'
 import { DAYS_OF_WEEKS } from '~/constants/habit'
+import { CircleProgressBar } from '~/ui/circle-progress-bar'
 import { cn } from '~/utils/cn'
 import { getMonthlyDates } from '~/utils/getMonthlyDates'
+
+const now = dayjs()
 
 type IProps = IStatistic & {
   index: number
   timeRange: ITimeRange
+  isTotal?: boolean
 }
 
-export const StatisticsRow = ({ index, id, title, streak, longest, completed, summary, timeRange }: IProps) => {
+export const StatisticsRow = ({
+  isTotal,
+  index,
+  id,
+  title,
+  timeOfDay,
+  streak,
+  longest,
+  completed,
+  summary,
+  timeRange
+}: IProps) => {
   const monthlyDates = getMonthlyDates()
 
   return (
@@ -23,7 +38,7 @@ export const StatisticsRow = ({ index, id, title, streak, longest, completed, su
       exit={{ opacity: 0, x: 100 + index * 100 }}
       transition={{ duration: 0.6, type: 'spring' }}
       className='bg-white rounded-xl shadow-xl border border-black/10 p-3'>
-      <h4 className='text-base font-semibold'>{title}</h4>
+      <h4 className='text-base font-semibold'>{isTotal ? 'Total' : `${title} (${timeOfDay?.toLowerCase()})`}</h4>
       <div className='flex gap-2 mb-2 text-gray-500 text-xs'>
         <p>
           Streak: <span className='text-black font-bold'>{streak}</span>
@@ -67,20 +82,23 @@ export const StatisticsRow = ({ index, id, title, streak, longest, completed, su
               {day}
             </div>
           ))}
-          {monthlyDates.map((date) => {
-            const value = summary[date]
+          {monthlyDates.map((date, index) => {
+            const value = date ? summary[date] : 0
+            const isMissed = value === 0 && !now.isSame(date, 'day')
+
             return (
-              <div key={date} className='flex flex-col gap-2 items-center'>
-                <div className='size-4 rounded-full bg-gray-light relative'>
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: value === 100 ? 1 : 0 }}
-                    transition={{ duration: 0.4 }}
-                    className={cn('inset-0 absolute rounded-full', {
-                      'bg-green': value === 100
-                    })}
+              <div key={date ?? index} className='flex flex-col gap-2 items-center'>
+                {date && (
+                  <CircleProgressBar
+                    onlyProgressBar
+                    showCompletionAnimation={false}
+                    isMissed={isTotal ? false : isMissed}
+                    size={20}
+                    strokeWidth={4}
+                    maxValue={100}
+                    currentValue={value}
                   />
-                </div>
+                )}
               </div>
             )
           })}

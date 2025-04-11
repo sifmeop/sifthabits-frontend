@@ -54,8 +54,7 @@ export const HabitRow = (props: IProps) => {
           showCompletionAnimation
           currentValue={currentRepeats}
           maxValue={repeats}
-          width={35}
-          height={35}
+          size={35}
           strokeWidth={6}
           text={() => (repeats === 1 || currentRepeats === repeats ? undefined : <span>{currentRepeats}</span>)}
           textClassName='font-bold'
