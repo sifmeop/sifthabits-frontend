@@ -20,6 +20,7 @@ export const useMarkHabitMissedMutation = () => {
       const upHabits = structuredClone(habits)
       const habitIndex = upHabits[day].findIndex((habit) => habit.id === id)
       upHabits[day][habitIndex] = data
+      queryClient.setQueryData(QUERY_KEYS.HABITS, upHabits)
     },
     onSettled: () => {
       queryClient.refetchQueries({ queryKey: QUERY_KEYS.STATISTICS('week') })
