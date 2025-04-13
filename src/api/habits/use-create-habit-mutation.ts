@@ -19,16 +19,21 @@ export const useCreateHabitMutation = () => {
       return response.data
     },
     onSuccess: (data) => {
-      const date = new Date()
-      const day = dayjs(date).isoWeekday()
+      const date = dayjs()
+      const today = dayjs().isoWeekday()
+      const weekDays = data.habit.weekDays
+
+      if (!weekDays.includes(today)) {
+        return
+      }
 
       const habits = queryClient.getQueryData(QUERY_KEYS.HABITS) as Record<number, PopulatedUserHabit[]>
       const upHabits = structuredClone(habits)
-      upHabits[day] = [data, ...upHabits[day]]
+      upHabits[today] = [data, ...upHabits[today]]
 
       queryClient.setQueryData(QUERY_KEYS.HABITS, upHabits)
 
-      setSelectedDate(date)
+      setSelectedDate(date.toDate())
     },
     onSettled: () => {
       queryClient.refetchQueries({ queryKey: QUERY_KEYS.STATISTICS('week') })
