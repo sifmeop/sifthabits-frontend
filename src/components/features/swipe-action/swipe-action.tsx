@@ -70,7 +70,7 @@ export const SwipeAction = ({ index, children, id, habit, status, repeats: curre
       controlsX += 50
     }
 
-    controls.start({ x: controlsX })
+    controls.start({ x: -controlsX })
   }
 
   return (
