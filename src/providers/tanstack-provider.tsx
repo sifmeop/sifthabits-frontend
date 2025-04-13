@@ -1,6 +1,6 @@
 import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { closeMiniApp } from '@telegram-apps/sdk-react'
+import { showPopup } from '@telegram-apps/sdk-react'
 import { AxiosError } from 'axios'
 
 const queryClient = new QueryClient({
@@ -18,7 +18,13 @@ const queryClient = new QueryClient({
         const isForbiddenError = error.response && error.response.status === 403
 
         if (isForbiddenError) {
-          closeMiniApp()
+          console.debug('Forbidden error', error)
+          showPopup({
+            title: 'Forbidden',
+            message: 'You are not logged in. Please press "/start" in the bot to login.',
+            buttons: [{ type: 'close' }]
+          })
+          // closeMiniApp()
         }
       }
     }
