@@ -1,28 +1,31 @@
-import { Edit2, Trash2, Undo2 } from 'lucide-react'
+import { CircleX, Edit2, Trash2, Undo2 } from 'lucide-react'
 import { motion, PanInfo, useAnimation } from 'motion/react'
 import { useEffect, useRef } from 'react'
 import { IEditHabitBody } from '~/api/habits'
 import { HabitForm } from '~/features/habits-form'
 import { useToggle } from '~/hooks/use-toggle'
-import { PopulatedUserHabit } from '~/interfaces/habits'
+import { HabitStatus, PopulatedUserHabit } from '~/interfaces/habits'
 import { HabitDeleteConfirmation } from './habit-delete-confirmation'
 import { HabitUndoConfirmation } from './habit-undo-confirmation'
+import { MarkHabitMissedConfirmation } from './mark-habit-missed-confirmation'
 
 type IProps = PopulatedUserHabit & {
   index: number
   children: React.ReactNode
 }
 
-export const SwipeAction = ({ index, children, id, habit, repeats: currentRepeats }: IProps) => {
+export const SwipeAction = ({ index, children, id, habit, status, repeats: currentRepeats }: IProps) => {
   const { title, timeOfDay, weekDays, repeats } = habit
 
   const [isOpenDeleteSheet, toggleDelete] = useToggle()
   const [isOpenEditSheet, toggleEdit] = useToggle()
   const [isOpenUndoSheet, toggleUndo] = useToggle()
+  const [isOpenMarkMissedSheet, toggleMarkMissed] = useToggle()
 
   const controls = useAnimation()
   const constraintsRef = useRef<HTMLDivElement>(null)
   const isCanUndo = currentRepeats > 0
+  const isCanMarkMissed = status !== HabitStatus.MISSED
 
   const initData: IEditHabitBody & { currentRepeats: number } = {
     id,
@@ -57,7 +60,17 @@ export const SwipeAction = ({ index, children, id, habit, repeats: currentRepeat
       return
     }
 
-    controls.start({ x: isCanUndo ? -150 : -100 })
+    let controlsX = 100
+
+    if (isCanUndo) {
+      controlsX += 50
+    }
+
+    if (isCanMarkMissed) {
+      controlsX += 50
+    }
+
+    controls.start({ x: controlsX })
   }
 
   return (
@@ -72,6 +85,14 @@ export const SwipeAction = ({ index, children, id, habit, repeats: currentRepeat
         className='relative w-full overflow-hidden bg-gray-light rounded-xl shadow-xl border border-black/10'>
         <div className='absolute right-0 top-0 flex h-full shadow-xl z-[0]'>
           <div className='flex'>
+            {isCanMarkMissed && (
+              <button
+                type='button'
+                className='flex h-full w-[50px] items-center justify-center bg-red text-white'
+                onClick={toggleMarkMissed}>
+                <CircleX size={20} />
+              </button>
+            )}
             {isCanUndo && (
               <button
                 type='button'
@@ -107,6 +128,7 @@ export const SwipeAction = ({ index, children, id, habit, repeats: currentRepeat
       </motion.div>
       <HabitDeleteConfirmation id={habit.id} isOpen={isOpenDeleteSheet} onClose={toggleDelete} />
       <HabitUndoConfirmation id={id} isOpen={isOpenUndoSheet} onClose={toggleUndo} />
+      <MarkHabitMissedConfirmation id={id} isOpen={isOpenMarkMissedSheet} onClose={toggleMarkMissed} />
       <HabitForm isOpen={isOpenEditSheet} onClose={toggleEdit} initData={initData} />
     </>
   )

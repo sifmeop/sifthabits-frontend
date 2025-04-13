@@ -24,7 +24,6 @@ const queryClient = new QueryClient({
             message: 'You are not logged in. Please press "/start" in the bot to login.',
             buttons: [{ type: 'close' }]
           })
-          // closeMiniApp()
         }
       }
     }

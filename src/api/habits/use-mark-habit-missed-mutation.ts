@@ -1,0 +1,29 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import dayjs from 'dayjs'
+import { MUTATION_KEYS } from '~/constants/mutation-keys'
+import { QUERY_KEYS } from '~/constants/query-keys'
+import { PopulatedUserHabit } from '~/interfaces/habits'
+import API from '~/lib/api'
+
+export const useMarkHabitMissedMutation = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationKey: MUTATION_KEYS.MARK_MISSED,
+    mutationFn: async (id: string) => {
+      const response = await API.put<PopulatedUserHabit>(`/habits/${id}/missed`)
+      return response.data
+    },
+    onSuccess: (data, id) => {
+      const day = dayjs(data.createdAt).isoWeekday()
+      const habits = queryClient.getQueryData(QUERY_KEYS.HABITS) as Record<number, PopulatedUserHabit[]>
+      const upHabits = structuredClone(habits)
+      const habitIndex = upHabits[day].findIndex((habit) => habit.id === id)
+      upHabits[day][habitIndex] = data
+    },
+    onSettled: () => {
+      queryClient.refetchQueries({ queryKey: QUERY_KEYS.STATISTICS('week') })
+      queryClient.refetchQueries({ queryKey: QUERY_KEYS.STATISTICS('month') })
+    }
+  })
+}
