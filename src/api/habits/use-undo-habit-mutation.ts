@@ -16,6 +16,7 @@ export const useUndoHabitMutation = () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.HABITS })
       queryClient.refetchQueries({ queryKey: QUERY_KEYS.STATISTICS('week') })
       queryClient.refetchQueries({ queryKey: QUERY_KEYS.STATISTICS('month') })
+      queryClient.refetchQueries({ queryKey: QUERY_KEYS.GLOBAL_STATISTICS })
     }
   })
 }

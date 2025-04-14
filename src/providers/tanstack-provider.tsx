@@ -14,11 +14,23 @@ const queryClient = new QueryClient({
   },
   queryCache: new QueryCache({
     onError: (error) => {
+      console.debug('Error on query:', error)
+
       if (error instanceof AxiosError) {
+        const isErrorNetwork = error.code === 'ERR_NETWORK'
+
+        if (isErrorNetwork) {
+          showPopup({
+            title: 'Network error',
+            message: 'Please try again later.',
+            buttons: [{ type: 'close' }]
+          })
+          return
+        }
+
         const isForbiddenError = error.response && error.response.status === 403
 
         if (isForbiddenError) {
-          console.debug('Forbidden error', error)
           showPopup({
             title: 'Forbidden',
             message: 'You are not logged in. Please press "/start" in the bot to login.',

@@ -16,6 +16,7 @@ export interface IGlobalUserStatistic {
   xpToNextLevel: number
   photoUrl: string | null
   createdAt: string
+  weeklySummary: Record<string, number>
 }
 
 export const useGetGlobalStatisticsQuery = () => {

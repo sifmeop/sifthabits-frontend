@@ -1,6 +1,6 @@
 'use client'
 
-import { ChartArea, List } from 'lucide-react'
+import { ChartArea, List, Users } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ROUTER_LINKS } from '~/constants/router-links'
@@ -21,12 +21,12 @@ const LINKS = [
     href: ROUTER_LINKS.STATISTICS,
     Icon: ChartArea,
     label: 'Statistics'
+  },
+  {
+    href: ROUTER_LINKS.LEADERBOARD,
+    Icon: Users,
+    label: 'Leaderboard'
   }
-  // {
-  //   href: ROUTER_LINKS.LEADERBOARD,
-  //   Icon: ChartArea,
-  //   label: 'Leaderboard'
-  // }
 ]
 
 export const Navigation = () => {
