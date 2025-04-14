@@ -15,7 +15,7 @@ type IProps = PopulatedUserHabit & {
 }
 
 export const SwipeAction = ({ index, children, id, habit, status, repeats: currentRepeats }: IProps) => {
-  const { title, timeOfDay, weekDays, repeats } = habit
+  const { title, timeOfDay, weekDays, repeats, remindAt } = habit
 
   const [isOpenDeleteSheet, toggleDelete] = useToggle()
   const [isOpenEditSheet, toggleEdit] = useToggle()
@@ -33,7 +33,8 @@ export const SwipeAction = ({ index, children, id, habit, status, repeats: curre
     repeats,
     currentRepeats,
     timeOfDay,
-    weekDays
+    weekDays,
+    remindAt
   }
 
   useEffect(() => {

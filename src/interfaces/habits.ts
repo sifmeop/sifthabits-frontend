@@ -5,6 +5,7 @@ export interface IHabit {
   weekDays: number[]
   repeats: number
   timeOfDay: HabitTimeOfDay
+  remindAt: string | null
   userId: string
   createdAt: string
 }
