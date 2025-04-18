@@ -33,9 +33,7 @@ const queryClient = new QueryClient({
         if (isForbiddenError) {
           showPopup({
             title: 'ERROR',
-            message:
-              `retrieveRawInitData: ${retrieveRawInitData()}` ||
-              `retrieveRawLaunchParams: ${retrieveRawLaunchParams()}`,
+            message: `retrieveRawInitData: ${retrieveRawInitData()}, retrieveRawLaunchParams: ${retrieveRawLaunchParams()}`,
             buttons: [{ type: 'close' }]
           })
           // showPopup({
