@@ -1,6 +1,6 @@
 import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { showPopup } from '@telegram-apps/sdk-react'
+import { retrieveRawInitData, retrieveRawLaunchParams, showPopup } from '@telegram-apps/sdk-react'
 import { AxiosError } from 'axios'
 
 const queryClient = new QueryClient({
@@ -32,10 +32,17 @@ const queryClient = new QueryClient({
 
         if (isForbiddenError) {
           showPopup({
-            title: 'Forbidden',
-            message: 'You are not logged in. Please press "/start" in the bot to login.',
+            title: 'ERROR',
+            message:
+              `retrieveRawInitData: ${retrieveRawInitData()}` ||
+              `retrieveRawLaunchParams: ${retrieveRawLaunchParams()}`,
             buttons: [{ type: 'close' }]
           })
+          // showPopup({
+          //   title: 'Forbidden',
+          //   message: 'You are not logged in. Please press "/start" in the bot to login.',
+          //   buttons: [{ type: 'close' }]
+          // })
         }
       }
     }
