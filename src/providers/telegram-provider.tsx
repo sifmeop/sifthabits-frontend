@@ -1,4 +1,13 @@
-import { disableVerticalSwipes, expandViewport, init, isTMA, mountSwipeBehavior } from '@telegram-apps/sdk-react'
+import {
+  closeMiniApp,
+  disableVerticalSwipes,
+  expandViewport,
+  init,
+  isTMA,
+  mountSwipeBehavior,
+  on
+} from '@telegram-apps/sdk-react'
+import { useEffect } from 'react'
 import { NODE_ENV } from '~/constants/common'
 
 try {
@@ -6,11 +15,25 @@ try {
   mountSwipeBehavior()
   expandViewport()
   disableVerticalSwipes()
+  const removeListener = on('popup_closed', (event) => {
+    const button_id = event.button_id
+
+    switch (button_id) {
+      case 'close_mini_app':
+        closeMiniApp()
+      default:
+        break
+    }
+
+    removeListener()
+  })
 } catch (error) {
   console.log(`Error initializing Telegram SDK: ${error}`)
 }
 
 export const TelegramProvider = ({ children }: React.PropsWithChildren) => {
+  useEffect(() => {}, [])
+
   if (NODE_ENV === 'production' && !isTMA()) {
     return (
       <div className='grid place-items-center h-dvh bg-white'>

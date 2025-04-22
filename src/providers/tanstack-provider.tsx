@@ -1,6 +1,6 @@
 import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { retrieveRawInitData, retrieveRawLaunchParams, showPopup } from '@telegram-apps/sdk-react'
+import { showPopup } from '@telegram-apps/sdk-react'
 import { AxiosError } from 'axios'
 
 const queryClient = new QueryClient({
@@ -23,7 +23,7 @@ const queryClient = new QueryClient({
           showPopup({
             title: 'Network error',
             message: 'Please try again later.',
-            buttons: [{ type: 'close' }]
+            buttons: [{ id: 'close_mini_app', type: 'close' }]
           })
           return
         }
@@ -32,15 +32,10 @@ const queryClient = new QueryClient({
 
         if (isForbiddenError) {
           showPopup({
-            title: 'ERROR',
-            message: `retrieveRawInitData: ${retrieveRawInitData()}, retrieveRawLaunchParams: ${retrieveRawLaunchParams()}, retrieveRawInitData: ${retrieveRawInitData()}`,
-            buttons: [{ type: 'close' }]
+            title: 'Forbidden',
+            message: 'You are not logged in or you blocked the bot. Please press "/start" in the bot.',
+            buttons: [{ id: 'close_mini_app', type: 'close' }]
           })
-          // showPopup({
-          //   title: 'Forbidden',
-          //   message: 'You are not logged in. Please press "/start" in the bot to login.',
-          //   buttons: [{ type: 'close' }]
-          // })
         }
       }
     }
