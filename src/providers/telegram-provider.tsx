@@ -15,6 +15,7 @@ try {
   mountSwipeBehavior()
   expandViewport()
   disableVerticalSwipes()
+
   const removeListener = on('popup_closed', (event) => {
     const button_id = event.button_id
 
