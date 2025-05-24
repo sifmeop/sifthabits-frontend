@@ -25,7 +25,7 @@ export const SwipeAction = ({ index, children, id, habit, status, repeats: curre
   const controls = useAnimation()
   const constraintsRef = useRef<HTMLDivElement>(null)
   const isCanUndo = currentRepeats > 0
-  const isCanMarkMissed = status !== HabitStatus.MISSED
+  const isCanMarkMissed = status === HabitStatus.DONE
 
   const initData: IEditHabitBody & { currentRepeats: number } = {
     id,

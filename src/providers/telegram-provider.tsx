@@ -22,6 +22,7 @@ try {
     switch (button_id) {
       case 'close_mini_app':
         closeMiniApp()
+        break
       default:
         break
     }

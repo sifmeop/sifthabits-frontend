@@ -17,26 +17,11 @@ const queryClient = new QueryClient({
       console.debug('Error on query:', error)
 
       if (error instanceof AxiosError) {
-        const isErrorNetwork = error.code === 'ERR_NETWORK'
-
-        if (isErrorNetwork) {
-          showPopup({
-            title: 'Network error',
-            message: 'Please try again later.',
-            buttons: [{ id: 'close_mini_app', type: 'close' }]
-          })
-          return
-        }
-
-        const isForbiddenError = error.response && error.response.status === 403
-
-        if (isForbiddenError) {
-          showPopup({
-            title: 'Forbidden',
-            message: 'You are not logged in or you blocked the bot. Please press "/start" in the bot.',
-            buttons: [{ id: 'close_mini_app', type: 'close' }]
-          })
-        }
+        showPopup({
+          title: 'Something went wrong',
+          message: 'Please try again later',
+          buttons: [{ id: 'close_mini_app', type: 'close' }]
+        })
       }
     }
   })
