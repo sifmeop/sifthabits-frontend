@@ -88,7 +88,7 @@ export const SwipeAction = ({ index, children, id, habit, status, repeats: curre
             {isCanMarkMissed && (
               <button
                 type='button'
-                className='flex h-full w-[50px] items-center justify-center bg-red text-white'
+                className='flex h-full w-[50px] items-center justify-center bg-gray-400 text-white'
                 onClick={toggleMarkMissed}>
                 <CircleX size={20} />
               </button>
