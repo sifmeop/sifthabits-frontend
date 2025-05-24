@@ -67,6 +67,7 @@ export const CircleProgressBar = ({
         transition: { duration: 0.3 }
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentValue, maxValue])
 
   useEffect(() => {
@@ -87,6 +88,7 @@ export const CircleProgressBar = ({
         transition: { duration: 0.3 }
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isComplete, strokeDashoffset, controls, completionControls, backgroundControls])
 
   const displayText = typeof text === 'function' ? text(percentage) : text

@@ -4,8 +4,7 @@ export interface IHabit {
   status: HabitStatus
   weekDays: number[]
   repeats: number
-  timeOfDay: HabitTimeOfDay
-  remindAt: string | null
+  timeOfDay: TimeOfDay
   userId: string
   createdAt: string
 }
@@ -24,10 +23,11 @@ export type PopulatedUserHabit = IUserHabit & { habit: IHabit }
 export enum HabitStatus {
   IN_PROGRESS = 'IN_PROGRESS',
   DONE = 'DONE',
-  MISSED = 'MISSED'
+  MISSED = 'MISSED',
+  SKIPPED = 'SKIPPED'
 }
 
-export enum HabitTimeOfDay {
+export enum TimeOfDay {
   ANYTIME = 'ANYTIME',
   MORNING = 'MORNING',
   AFTERNOON = 'AFTERNOON',

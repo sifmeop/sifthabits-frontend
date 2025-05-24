@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from 'motion/react'
 import { ITimeRange, useGetStatisticsQuery } from '~/api/habits'
-import { HabitTimeOfDay } from '~/interfaces/habits'
+import { TimeOfDay } from '~/interfaces/habits'
 import { Spinner } from '~/ui/spinner'
 import { StatisticsRow } from './statistics-row'
 import { StatisticsTotal } from './statistics-total'
@@ -15,10 +15,10 @@ export const StatisticsList = ({ timeRange }: IProps) => {
   const { data = [], isError, isLoading, isSuccess } = useGetStatisticsQuery(timeRange)
   const isEmpty = !isLoading && isSuccess && data && data.length === 0
 
-  const anytimeHabits = data.filter((habit) => habit.timeOfDay === HabitTimeOfDay.ANYTIME) ?? []
-  const morningsHabits = data.filter((habit) => habit.timeOfDay === HabitTimeOfDay.MORNING) ?? []
-  const afternoonsHabits = data.filter((habit) => habit.timeOfDay === HabitTimeOfDay.AFTERNOON) ?? []
-  const eveningsHabits = data.filter((habit) => habit.timeOfDay === HabitTimeOfDay.EVENING) ?? []
+  const anytimeHabits = data.filter((habit) => habit.timeOfDay === TimeOfDay.ANYTIME) ?? []
+  const morningsHabits = data.filter((habit) => habit.timeOfDay === TimeOfDay.MORNING) ?? []
+  const afternoonsHabits = data.filter((habit) => habit.timeOfDay === TimeOfDay.AFTERNOON) ?? []
+  const eveningsHabits = data.filter((habit) => habit.timeOfDay === TimeOfDay.EVENING) ?? []
 
   return (
     <div id='statistics-list' className='overflow-y-auto p-3'>

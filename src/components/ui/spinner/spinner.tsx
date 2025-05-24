@@ -29,7 +29,7 @@ export const Spinner = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className={cn('relative rounded-xl', wrapperClassName, {
+          className={cn('relative rounded-lg', wrapperClassName, {
             'absolute inset-0 grid place-items-center bg-black/60 z-[1]': boxCenter,
             'fixed inset-0 grid h-dvh rounded-none place-items-center z-10 bg-black/30': screenCenter,
             'flex justify-center': centerX

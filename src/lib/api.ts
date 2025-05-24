@@ -1,4 +1,3 @@
-import { retrieveRawInitData } from '@telegram-apps/sdk-react'
 import axios from 'axios'
 import { NODE_ENV } from '~/constants/common'
 
@@ -7,7 +6,7 @@ const API = axios.create({
 })
 
 API.interceptors.request.use((config) => {
-  config.headers['tma-init-data'] = NODE_ENV === 'production' ? retrieveRawInitData() : ''
+  config.headers['tma-init-data'] = NODE_ENV === 'production' ? Telegram.WebApp.initData : ''
   return config
 })
 

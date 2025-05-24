@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import { AnimatePresence, motion } from 'motion/react'
 import { useGetHabitsQuery } from '~/api/habits'
-import { HabitTimeOfDay } from '~/interfaces/habits'
+import { TimeOfDay } from '~/interfaces/habits'
 import { Spinner } from '~/ui/spinner'
 import { HabitSection } from './habit-section'
 import { useSelectedDate } from './habits-provider'
@@ -11,10 +11,10 @@ export const HabitsList = () => {
   const { selectedDate } = useSelectedDate()
   const day = dayjs(selectedDate).isoWeekday()
 
-  const anytimeHabits = data?.[day]?.filter(({ habit }) => habit.timeOfDay === HabitTimeOfDay.ANYTIME) ?? []
-  const morningsHabits = data?.[day]?.filter(({ habit }) => habit.timeOfDay === HabitTimeOfDay.MORNING) ?? []
-  const afternoonsHabits = data?.[day]?.filter(({ habit }) => habit.timeOfDay === HabitTimeOfDay.AFTERNOON) ?? []
-  const eveningsHabits = data?.[day]?.filter(({ habit }) => habit.timeOfDay === HabitTimeOfDay.EVENING) ?? []
+  const anytimeHabits = data?.[day]?.filter(({ habit }) => habit.timeOfDay === TimeOfDay.ANYTIME) ?? []
+  const morningsHabits = data?.[day]?.filter(({ habit }) => habit.timeOfDay === TimeOfDay.MORNING) ?? []
+  const afternoonsHabits = data?.[day]?.filter(({ habit }) => habit.timeOfDay === TimeOfDay.AFTERNOON) ?? []
+  const eveningsHabits = data?.[day]?.filter(({ habit }) => habit.timeOfDay === TimeOfDay.EVENING) ?? []
   const isEmpty =
     isSuccess &&
     anytimeHabits?.length === 0 &&
@@ -49,10 +49,10 @@ export const HabitsList = () => {
             No habits
           </motion.p>
         )}
-        <HabitSection showTitle={showAnytimeTitle} timeOfDay={HabitTimeOfDay.ANYTIME} data={anytimeHabits} />
-        <HabitSection timeOfDay={HabitTimeOfDay.MORNING} data={morningsHabits} />
-        <HabitSection timeOfDay={HabitTimeOfDay.AFTERNOON} data={afternoonsHabits} />
-        <HabitSection timeOfDay={HabitTimeOfDay.EVENING} data={eveningsHabits} />
+        <HabitSection showTitle={showAnytimeTitle} timeOfDay={TimeOfDay.ANYTIME} data={anytimeHabits} />
+        <HabitSection timeOfDay={TimeOfDay.MORNING} data={morningsHabits} />
+        <HabitSection timeOfDay={TimeOfDay.AFTERNOON} data={afternoonsHabits} />
+        <HabitSection timeOfDay={TimeOfDay.EVENING} data={eveningsHabits} />
       </div>
     </AnimatePresence>
   )

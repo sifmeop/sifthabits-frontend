@@ -17,7 +17,7 @@ export const Button = ({ className, isLoading, children, color = ButtonColor.PRI
     <button
       type='button'
       className={cn(
-        'relative w-full grid place-items-center p-2 rounded-xl text-white transition-all duration-300',
+        'relative w-full grid place-items-center p-2 rounded-lg text-white transition-all duration-300',
         className,
         {
           'bg-blue': color === ButtonColor.PRIMARY,

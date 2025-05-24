@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import { QUERY_KEYS } from '~/constants/query-keys'
-import { HabitTimeOfDay } from '~/interfaces/habits'
+import { TimeOfDay } from '~/interfaces/habits'
 import API from '~/lib/api'
 
 export interface IStatistic {
   id: string
   title: string
-  timeOfDay?: HabitTimeOfDay
+  timeOfDay?: TimeOfDay
   streak: number
   longest: number
   completed: number

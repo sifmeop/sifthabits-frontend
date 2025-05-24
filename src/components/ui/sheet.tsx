@@ -47,6 +47,7 @@ export const Sheet = ({ isOpen, onClose, title, size = 'lg', children, isLoading
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const getHeightSize = () => {

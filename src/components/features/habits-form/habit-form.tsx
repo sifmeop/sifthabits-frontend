@@ -4,7 +4,6 @@ import { FormProvider } from 'react-hook-form'
 import { IEditHabitBody } from '~/api/habits'
 import { Button } from '~/ui/button'
 import { Sheet } from '~/ui/sheet'
-import { RemindTimePicker } from './remind-time-picker'
 import { RepeatsPerDay } from './repeats-per-day'
 import { SelectDaysOfWeeks } from './select-days-of-weeks'
 import { SelectTimeOfDay } from './select-time-of-day'
@@ -18,7 +17,7 @@ interface IProps {
 }
 
 export const HabitForm = ({ isOpen, onClose, initData }: IProps) => {
-  const { onSubmit, isLoading, ...methods } = useHabitForm(isOpen, initData, onClose)
+  const { onSubmit, isLoading, ...methods } = useHabitForm(initData, onClose)
 
   const handleClose = () => {
     if (isLoading) {
@@ -36,7 +35,6 @@ export const HabitForm = ({ isOpen, onClose, initData }: IProps) => {
           <TitleInput />
           <SelectDaysOfWeeks />
           <SelectTimeOfDay />
-          <RemindTimePicker />
           <RepeatsPerDay />
           <div className='space-y-2'>
             <Button type='submit' isLoading={isLoading}>

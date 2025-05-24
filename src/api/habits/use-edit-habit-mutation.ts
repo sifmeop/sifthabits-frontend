@@ -29,7 +29,6 @@ export const useEditHabitMutation = () => {
       queryClient.setQueryData(QUERY_KEYS.HABITS, upHabits)
       queryClient.refetchQueries({ queryKey: QUERY_KEYS.STATISTICS('week') })
       queryClient.refetchQueries({ queryKey: QUERY_KEYS.STATISTICS('month') })
-      queryClient.refetchQueries({ queryKey: QUERY_KEYS.GLOBAL_STATISTICS })
     }
   })
 }

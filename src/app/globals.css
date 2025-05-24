@@ -18,7 +18,7 @@
 }
 
 body {
-  @apply font-roboto text-sm bg-black overflow-hidden;
+  @apply font-roboto text-sm bg-[#f9fafc] overflow-hidden;
 }
 
 .hide-scrollbar {

@@ -1,8 +1,8 @@
-import { HabitTimeOfDay, PopulatedUserHabit } from '~/interfaces/habits'
+import { PopulatedUserHabit, TimeOfDay } from '~/interfaces/habits'
 import { HabitRow } from './habit-row'
 
 interface IProps {
-  timeOfDay: HabitTimeOfDay
+  timeOfDay: TimeOfDay
   data: PopulatedUserHabit[] | undefined
   showTitle?: boolean
 }
@@ -13,9 +13,9 @@ export const HabitSection = ({ timeOfDay, data, showTitle = true }: IProps) => {
   }
 
   return (
-    <div className='space-y-1'>
-      {showTitle && <p className='font-bold text-xs'>{timeOfDay}</p>}
-      <div className='space-y-2'>
+    <div className='space-y-2'>
+      {showTitle && <p className='text-sm font-medium text-gray-400 tracking-wide'>{timeOfDay}</p>}
+      <div className='rounded-lg shadow-lg border border-gray-100 overflow-hidden divide-y divide-gray-100'>
         {data.map((props, index) => (
           <HabitRow key={props.id} {...props} index={index} />
         ))}

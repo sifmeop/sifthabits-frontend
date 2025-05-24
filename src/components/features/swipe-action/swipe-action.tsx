@@ -15,7 +15,7 @@ type IProps = PopulatedUserHabit & {
 }
 
 export const SwipeAction = ({ index, children, id, habit, status, repeats: currentRepeats }: IProps) => {
-  const { title, timeOfDay, weekDays, repeats, remindAt } = habit
+  const { title, timeOfDay, weekDays, repeats } = habit
 
   const [isOpenDeleteSheet, toggleDelete] = useToggle()
   const [isOpenEditSheet, toggleEdit] = useToggle()
@@ -33,8 +33,7 @@ export const SwipeAction = ({ index, children, id, habit, status, repeats: curre
     repeats,
     currentRepeats,
     timeOfDay,
-    weekDays,
-    remindAt
+    weekDays
   }
 
   useEffect(() => {
@@ -83,7 +82,7 @@ export const SwipeAction = ({ index, children, id, habit, status, repeats: curre
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: 100 + index * 100 }}
         transition={{ duration: 0.6, type: 'spring' }}
-        className='relative w-full overflow-hidden bg-gray-light rounded-xl shadow-xl border border-black/10'>
+        className='relative w-full overflow-hidden bg-white'>
         <div className='absolute right-0 top-0 flex h-full shadow-xl z-[0]'>
           <div className='flex'>
             {isCanMarkMissed && (

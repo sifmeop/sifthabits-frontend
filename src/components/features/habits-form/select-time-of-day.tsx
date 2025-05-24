@@ -1,27 +1,27 @@
 import { useFormContext } from 'react-hook-form'
-import { HabitTimeOfDay } from '~/interfaces/habits'
+import { TimeOfDay } from '~/interfaces/habits'
 import { Tabs } from '~/ui/tab'
 import { THabitForm } from './use-habit-form'
 
 const options = [
   {
     label: 'Anytime',
-    value: HabitTimeOfDay.ANYTIME,
+    value: TimeOfDay.ANYTIME,
     tabIndex: 8
   },
   {
     label: 'Morning',
-    value: HabitTimeOfDay.MORNING,
+    value: TimeOfDay.MORNING,
     tabIndex: 9
   },
   {
     label: 'Afternoon',
-    value: HabitTimeOfDay.AFTERNOON,
+    value: TimeOfDay.AFTERNOON,
     tabIndex: 10
   },
   {
     label: 'Evening',
-    value: HabitTimeOfDay.EVENING,
+    value: TimeOfDay.EVENING,
     tabIndex: 11
   }
 ]

@@ -17,7 +17,7 @@ interface IProps<T> {
 
 export const Tabs = <T,>({ value: selectedValue, onChange, options, className }: IProps<T>) => {
   return (
-    <div className={cn('flex flex-col rounded-xl border border-gray-light p-1 gap-1', className)}>
+    <div className={cn('flex flex-col rounded-lg border border-gray-light p-1 gap-1', className)}>
       <div style={{ gridTemplateColumns: `repeat(${options.length}, 1fr)` }} className='grid w-full'>
         {options.map(({ label, value }) => (
           <button

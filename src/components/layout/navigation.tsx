@@ -7,11 +7,6 @@ import { ROUTER_LINKS } from '~/constants/router-links'
 import { cn } from '~/utils/cn'
 
 const LINKS = [
-  // {
-  //   href: ROUTER_LINKS.AWARDS,
-  //   Icon: Trophy,
-  //   label: 'Awards'
-  // },
   {
     href: ROUTER_LINKS.HABITS,
     Icon: List,
@@ -22,11 +17,6 @@ const LINKS = [
     Icon: ChartArea,
     label: 'Statistics'
   }
-  // {
-  //   href: ROUTER_LINKS.LEADERBOARD,
-  //   Icon: Users,
-  //   label: 'Leaderboard'
-  // }
 ]
 
 export const Navigation = () => {
