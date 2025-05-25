@@ -37,7 +37,7 @@ export default async function RootLayout({
             <Layout>{children}</Layout>
           </Providers>
         </NextIntlClientProvider>
-        <Script src='https://telegram.org/js/telegram-web-app.js' strategy='beforeInteractive' />
+        <Script src='https://telegram.org/js/telegram-web-app.js' />
       </body>
     </html>
   )
