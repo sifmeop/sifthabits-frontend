@@ -16,16 +16,11 @@ export const useDoneHabitMutation = () => {
     onMutate: (id) => {
       const previousHabits = queryClient.getQueryData(QUERY_KEYS.HABITS) as Record<number, PopulatedUserHabit[]>
       const upHabits = structuredClone(previousHabits)
-      let day = Object.values(upHabits).findIndex((habits) => habits.some((habit) => habit.id === id))
+      const day = Object.values(upHabits).findIndex((habits) => habits.some((habit) => habit.id === id))
 
       if (day === -1) {
         return { previousHabits }
       }
-
-      day++
-
-      const habitIndex = upHabits[day].findIndex((habit) => habit.id === id)
-      upHabits[day][habitIndex].repeats++
 
       queryClient.setQueryData(QUERY_KEYS.HABITS, upHabits)
 

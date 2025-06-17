@@ -11,7 +11,6 @@ const schema = z.object({
   id: z.string().optional(),
   title: z.string().min(1),
   weekDays: z.array(z.number()).min(1, 'Please select at least one day'),
-  repeats: z.number(),
   timeOfDay: z.nativeEnum(TimeOfDay)
 })
 
@@ -26,7 +25,6 @@ export const useHabitForm = (initData?: IEditHabitBody, onClose?: () => void) =>
   const defaultValues: THabitForm = {
     title: initData?.title ?? '',
     weekDays: initData?.weekDays ?? DAYS_OF_WEEKS.map((day) => DAYS_OF_WEEKS.indexOf(day) + 1),
-    repeats: initData?.repeats ?? 1,
     timeOfDay: initData?.timeOfDay ?? TimeOfDay.ANYTIME
   }
 
@@ -49,7 +47,6 @@ export const useHabitForm = (initData?: IEditHabitBody, onClose?: () => void) =>
           id: initData.id!,
           title: data.title,
           weekDays: data.weekDays.sort((a, b) => a - b),
-          repeats: data.repeats,
           timeOfDay: data.timeOfDay
         }
         await editMutate(body as IEditHabitBody)
@@ -57,7 +54,6 @@ export const useHabitForm = (initData?: IEditHabitBody, onClose?: () => void) =>
         const body: ICreateHabitBody = {
           title: data.title,
           weekDays: data.weekDays.sort((a, b) => a - b),
-          repeats: data.repeats,
           timeOfDay: data.timeOfDay
         }
         await createMutate(body as ICreateHabitBody)

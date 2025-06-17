@@ -9,8 +9,8 @@ type IProps = PopulatedUserHabit & {
 }
 
 export const HabitRow = (props: IProps) => {
-  const { id, habit, repeats: currentRepeats, status } = props
-  const { title, repeats } = habit
+  const { id, habit, status } = props
+  const { title } = habit
 
   const isDone = status === HabitStatus.DONE
   const isMissed = status === HabitStatus.MISSED
@@ -33,9 +33,9 @@ export const HabitRow = (props: IProps) => {
         <div className='space-y-0.5'>
           <p className='font-semibold'>{title}</p>
           <div className='flex items-center gap-1.5'>
-            <span className='text-sm text-gray-500'>{repeats === 1 ? 'Once a day' : `Goal: ${repeats}`}</span>
+            <span className='text-sm text-gray-500'>Streak:</span>
             <AnimatePresence>
-              {(props.streak ?? 0) > 0 && (
+              {props.streak > 0 ? (
                 <motion.div
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -44,6 +44,8 @@ export const HabitRow = (props: IProps) => {
                   🔥 <span className='text-orange-400 text-xs'>{props.streak}</span>
                   {/* <Flame size={16} fill='red' stroke='red' /> */}
                 </motion.div>
+              ) : (
+                <span>-</span>
               )}
             </AnimatePresence>
           </div>
@@ -52,11 +54,10 @@ export const HabitRow = (props: IProps) => {
           isMissed={isMissed}
           onlyProgressBar={false}
           showCompletionAnimation
-          currentValue={currentRepeats}
-          maxValue={repeats}
+          currentValue={isDone ? 1 : 0}
+          maxValue={1}
           size={32}
           strokeWidth={5}
-          text={() => (repeats === 1 || currentRepeats === repeats ? undefined : <span>{currentRepeats}</span>)}
           textClassName='font-bold'
           onClick={onDone}
         />

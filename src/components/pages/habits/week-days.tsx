@@ -2,6 +2,7 @@ import dayjs from 'dayjs'
 import { motion } from 'motion/react'
 import { useGetHabitsQuery } from '~/api/habits'
 import { CURRENT_DATE, WEEK_DATES } from '~/constants/habit'
+import { HabitStatus } from '~/interfaces/habits'
 import { CircleProgressBar } from '~/ui/circle-progress-bar'
 import { cn } from '~/utils/cn'
 import { useSelectedDate } from './habits-provider'
@@ -19,13 +20,13 @@ export const WeekDays = () => {
     <div className='grid grid-cols-7 gap-2 p-2'>
       {WEEK_DATES.map((date, index) => {
         const progressByDay = data?.[index + 1] ?? []
-        const totalHabits = progressByDay.reduce((acc, { habit }) => {
-          const totalRepeats = acc + habit.repeats
-          return totalRepeats
-        }, 0)
-        const totalCompleted = progressByDay.reduce((acc, { repeats }) => {
-          const totalRepeats = acc + repeats
-          return totalRepeats
+        const totalHabits = progressByDay.length || 1
+        const totalCompleted = progressByDay.reduce((acc, { status }) => {
+          if (status === HabitStatus.DONE) {
+            acc++
+          }
+
+          return acc
         }, 0)
 
         return (
@@ -43,7 +44,7 @@ export const WeekDays = () => {
             <span>{dayjs(date).format('ddd')}</span>
             <CircleProgressBar
               onlyProgressBar
-              maxValue={totalHabits || 1}
+              maxValue={totalHabits}
               currentValue={totalCompleted}
               size={20}
               strokeWidth={4}

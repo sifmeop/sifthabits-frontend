@@ -3,7 +3,6 @@ export interface IHabit {
   title: string
   status: HabitStatus
   weekDays: number[]
-  repeats: number
   timeOfDay: TimeOfDay
   userId: string
   createdAt: string
@@ -12,10 +11,9 @@ export interface IHabit {
 export interface IUserHabit {
   id: string
   status: HabitStatus
-  repeats: number
   habitId: string
   createdAt: string
-  streak?: number
+  streak: number
 }
 
 export type PopulatedUserHabit = IUserHabit & { habit: IHabit }

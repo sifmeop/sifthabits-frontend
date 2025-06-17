@@ -14,8 +14,8 @@ type IProps = PopulatedUserHabit & {
   children: React.ReactNode
 }
 
-export const SwipeAction = ({ index, children, id, habit, status, repeats: currentRepeats }: IProps) => {
-  const { title, timeOfDay, weekDays, repeats } = habit
+export const SwipeAction = ({ index, children, id, habit, status }: IProps) => {
+  const { title, timeOfDay, weekDays } = habit
 
   const [isOpenDeleteSheet, toggleDelete] = useToggle()
   const [isOpenEditSheet, toggleEdit] = useToggle()
@@ -24,14 +24,12 @@ export const SwipeAction = ({ index, children, id, habit, status, repeats: curre
 
   const controls = useAnimation()
   const constraintsRef = useRef<HTMLDivElement>(null)
-  const isCanUndo = currentRepeats > 0
+  const isCanUndo = status === HabitStatus.DONE
   const isCanMarkMissed = status === HabitStatus.DONE
 
-  const initData: IEditHabitBody & { currentRepeats: number } = {
+  const initData: IEditHabitBody = {
     id,
     title,
-    repeats,
-    currentRepeats,
     timeOfDay,
     weekDays
   }

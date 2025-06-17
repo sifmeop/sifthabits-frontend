@@ -15,7 +15,7 @@ export const HabitSection = ({ timeOfDay, data, showTitle = true }: IProps) => {
   return (
     <div className='space-y-2'>
       {showTitle && <p className='text-sm font-medium text-gray-400 tracking-wide'>{timeOfDay}</p>}
-      <div className='rounded-lg shadow-lg border border-gray-100 overflow-hidden divide-y divide-gray-100'>
+      <div className='flex flex-col rounded-lg shadow-lg border border-gray-100 divide-y divide-gray-100'>
         {data.map((props, index) => (
           <HabitRow key={props.id} {...props} index={index} />
         ))}
